@@ -1,50 +1,46 @@
-# AI Town 🏠💻💌
+# AI 小镇 🏠💻💌
 
-[Live Demo](https://www.convex.dev/ai-town)
+[在线演示](https://www.convex.dev/ai-town)
 
-[Join our community Discord: AI Stack Devs](https://discord.gg/PQUmTBTGmT)
+[加入我们的社区Discord: AI Stack Devs](https://discord.gg/PQUmTBTGmT)
 
 <img width="1454" alt="Screen Shot 2023-08-14 at 10 01 00 AM" src="https://github.com/a16z-infra/ai-town/assets/3489963/a4c91f17-23ed-47ec-8c4e-9f9a8505057d">
 
-AI Town is a virtual town where AI characters live, chat and socialize.
+AI 小镇是一个虚拟的小镇,AI角色居住、聊天和社交的地方。
 
-This project is a deployable starter kit for easily building and customizing your own version of AI town.
-Inspired by the research paper [_Generative Agents: Interactive Simulacra of Human Behavior_](https://arxiv.org/pdf/2304.03442.pdf).
+该项目是一个可部署的入门工具包,可以轻松构建和定制你自己版本的 AI 小镇。
+灵感来自于研究论文[_Generative Agents: Interactive Simulacra of Human Behavior_](https://arxiv.org/pdf/2304.03442.pdf)。
 
-The primary goal of this project, beyond just being a lot of fun to work on,
-is to provide a platform with a strong foundation that is meant to be extended.
-The back-end natively supports shared global state, transactions, and a simulation engine
-and should be suitable from everything from a simple project to play around with to a scalable, multi-player game.
-A secondary goal is to make a JS/TS framework available as most simulators in this space
-(including the original paper above) are written in Python.
+该项目的主要目标除了工作本身会很有趣以外,
+还为拥有扎实基础的平台提供了可扩展的空间。
+后端原生支持共享全局状态、事务和模拟引擎,
+从简单的游戏项目到可扩展的多人游戏都是合适的。
+次要目标是提供一个 JS/TS 框架,因为这个领域中的大多数模拟器
+(包括上面提到的原始论文)都是用 Python 编写的。
 
-## Overview
+## 概览
 
-- 💻 [Stack](#stack)
-- 🧠 [Installation](#installation)
-- 👤 [Customize - run YOUR OWN simulated world](#customize-your-own-simulation)
-- 👩‍💻 [Deploying](#deploy-the-app)
-- 🏆 [Credits](#credits)
+- 💻 [技术栈](#技术栈)
+- 🧠 [安装](#安装)
+- 👤 [自定义 - 运行你自己的模拟世界](#自定义你自己的模拟)
+- 👩‍💻 [部署](#部署该应用程序)
+- 🏆 [致谢](#致谢)
 
-## Stack
+## 技术栈
 
-- Game engine, database, and vector search: [Convex](https://convex.dev/)
-- Auth (Optional): [Clerk](https://clerk.com/)
-- Default chat model is `llama3` and embeddings with `mxbai-embed-large`.
-- Local inference: [Ollama](https://github.com/jmorganca/ollama)
-- Configurable for other cloud LLMs: [Together.ai](https://together.ai/) or anything
-  that speaks the [OpenAI API](https://platform.openai.com/).
-  PRs welcome to add more cloud provider support.
-- Pixel Art Generation: [Replicate](https://replicate.com/), [Fal.ai](https://serverless.fal.ai/lora)
-- Background Music Generation: [Replicate](https://replicate.com/) using [MusicGen](https://huggingface.co/spaces/facebook/MusicGen)
+- 游戏引擎、数据库和向量搜索: [Convex](https://convex.dev/)
+- 认证 (可选): [Clerk](https://clerk.com/)
+- 默认的对话模型是 `llama3`，嵌入模型是 `mxbai-embed-large`。
+- 本地推理: [Ollama](https://github.com/jmorganca/ollama)
+- 可配置为其他云端 LLM: [Together.ai](https://together.ai/) 或任何支持 [OpenAI API](https://platform.openai.com/) 的服务。欢迎提交 PR 以添加更多云服务支持。
+- 像素艺术生成: [Replicate](https://replicate.com/)、[Fal.ai](https://serverless.fal.ai/lora)
+- 背景音乐生成: [Replicate](https://replicate.com/) 使用 [MusicGen](https://huggingface.co/spaces/facebook/MusicGen)
 
-## Installation
+## 安装
 
-**Note**: There is a one-click install of a fork of this project on
-[Pinokio](https://pinokio.computer/item?uri=https://github.com/cocktailpeanutlabs/aitown)
-for anyone interested in running but not modifying it 😎
+**注意**: 这个项目的一个分支可在 [Pinokio](https://pinokio.computer/item?uri=https://github.com/cocktailpeanutlabs/aitown) 上一键安装,供有兴趣运行但不想修改的人使用 😎
 
-### 1. Clone repo and Install packages
+### 1. 克隆仓库并安装软件包
 
 ```bash
 git clone https://github.com/a16z-infra/ai-town.git
@@ -52,154 +48,150 @@ cd ai-town
 npm install
 ```
 
-### 2. To develop locally with [Convex](https://convex.dev):
+### 2. 使用 [Convex](https://convex.dev) 进行本地开发:
 
-Either
-[download a pre-built binary(recommended)](https://github.com/get-convex/convex-backend/releases),
-or [build it from source and run it](https://stack.convex.dev/building-the-oss-backend).
+要么 [下载预构建的二进制文件(推荐)](https://github.com/get-convex/convex-backend/releases)，
+要么 [从源码构建并运行](https://stack.convex.dev/building-the-oss-backend)。
 
 ```sh
-# For new Macs:
+# 对于新的 Mac 机器:
 curl  -L -O https://github.com/get-convex/convex-backend/releases/latest/download/convex-local-backend-aarch64-apple-darwin.zip
 unzip convex-local-backend-aarch64-apple-darwin.zip
 
 brew install just
 
-# Runs the server
+# 运行服务器
 ./convex-local-backend
 ```
 
-This also [installs `just`](https://github.com/casey/just?tab=readme-ov-file#installation)
-(e.g. `brew install just` or `cargo install just`).
-We use `just` like `make` to add extra params, so you run `just convex ...`
-instead of `npx convex ...` for local development.
+这也会 [安装 `just`](https://github.com/casey/just?tab=readme-ov-file#installation)
+(例如 `brew install just` 或 `cargo install just`)。
+我们使用 `just` 就像 `make` 一样添加额外的参数,所以你需要运行 `just convex ...`
+而不是 `npx convex ...` 进行本地开发。
 
-If you're running the pre-built binary on Mac and there's an Apple warning,
-go to the folder it's in and right-click it and select "Open" to bypass.
-From then on you can run it from the commandline.
-Or you can compile it from source and run it (see above).
+如果你在 Mac 上运行预构建的二进制文件时出现 Apple 警告,
+进入它所在的文件夹,右键单击它并选择"打开"以绕过警告。
+从那时起你就可以从命令行运行它了。
+或者你也可以从源码编译并运行它(参见上文)。
 
-To develop against the cloud-hosted version, change the package.json scripts
-to use `convex ...` instead of `just convex ...`.
+如果你要针对云托管版本进行开发,请修改 package.json 脚本,
+将 `just convex ...` 改为 `convex ...`。
 
-### 3. To run a local LLM, download and run [Ollama](https://ollama.com/).
+### 3. 要运行本地 LLM,请下载并运行 [Ollama](https://ollama.com/)。
 
-You can leave the app running or run `ollama serve`.
-`ollama serve` will warn you if the app is already running.
-Run `ollama pull llama3` to have it download `llama3`.
-Test it out with `ollama run llama3`.
-If you want to customize which model to use, adjust convex/util/llm.ts or set
-`just convex env set LLM_MODEL # model`.
-Ollama model options can be found [here](https://ollama.ai/library).
+你可以让应用程序一直运行,或运行 `ollama serve`。
+如果应用程序已经在运行,`ollama serve` 会发出警告。
+运行 `ollama pull llama3` 让它下载 `llama3`。
+使用 `ollama run llama3` 进行测试。
+如果你想自定义使用哪个模型,请调整 convex/util/llm.ts 或设置
+`just convex env set LLM_MODEL # model`。
+Ollama 模型选项可在 [此处](https://ollama.ai/library) 找到。
 
-You might want to set `NUM_MEMORIES_TO_SEARCH` to `1` in constants.ts,
-to reduce the size of conversation prompts, if you see slowness.
+如果你发现速度变慢,你可能需要在 constants.ts 中将 `NUM_MEMORIES_TO_SEARCH` 设置为 `1`,
+以减小对话提示的大小。
 
-Check out `convex/config.ts` to configure which models to offer to the UI,
-or to set it up to talk to a cloud-hosted LLM.
+查看 `convex/config.ts` 以配置要在 UI 中提供哪些模型,
+或者设置与云托管的 LLM 对话。
 
-### 4. Adding background music with Replicate (Optional)
+### 4. 使用 Replicate 添加背景音乐 (可选)
 
-For Daily background music generation, create a
-[Replicate](https://replicate.com/) account and create a token in your Profile's
-[API Token page](https://replicate.com/account/api-tokens).
+为了每日生成背景音乐,请在
+[Replicate](https://replicate.com/) 上创建一个账户,并在你的个人资料的
+[API Token 页面](https://replicate.com/account/api-tokens)创建一个令牌。
 `npx convex env set REPLICATE_API_TOKEN # token`
-Specify `just` instead of `npx` if you're doing local development.
+如果你在进行本地开发,请使用 `just` 而不是 `npx`。
 
-### 5. Run the code
+### 5. 运行代码
 
-To run both the front and and back end:
+要同时运行前端和后端:
 
 ```bash
 npm run dev
 ```
 
-**Note**: If you encounter a node version error on the convex server upon application startup, please use node version 18, which is the most stable. One way to do this is by [installing nvm](https://nodejs.org/en/download/package-manager) and running `nvm install 18` or `nvm use 18`. Do this before both the `npm run dev` above and the `./convex-local-backend` in Step 2.
+**注意**: 如果在应用程序启动时 convex 服务器上出现节点版本错误,请使用版本 18,这是最稳定的版本。一种方式是 [安装 nvm](https://nodejs.org/en/download/package-manager) 并运行 `nvm install 18` 或 `nvm use 18`。
+```
+在执行上述的 `npm run dev` 和第 2 步中的 `./convex-local-backend` 之前都要这样做。
 
-You can now visit http://localhost:5173.
+现在你可以访问 http://localhost:5173 了。
 
-If you'd rather run the frontend in a separate terminal from Convex (which syncs
-your backend functions as they're saved), you can run these two commands:
+如果你希望前端和 Convex 分别在不同的终端中运行(后者会在保存后端函数时同步),你可以运行以下两个命令:
 
 ```bash
 npm run dev:frontend
 npm run dev:backend
 ```
 
-See package.json for details, but dev:backend runs `just convex dev`
+详情请查看 package.json,但 dev:backend 运行的是 `just convex dev`
 
-**Note**: The simulation will pause after 5 minutes if the window is idle.
-Loading the page will unpause it.
-You can also manually freeze & unfreeze the world with a button in the UI.
-If you want to run the world without the
-browser, you can comment-out the "stop inactive worlds" cron in `convex/crons.ts`.
+**注意**: 如果窗口闲置 5 分钟后,模拟将会暂停。
+加载页面将会取消暂停。
+你也可以使用 UI 中的按钮手动冻结和解冻世界。
+如果你想在没有浏览器的情况下运行世界,你可以在 `convex/crons.ts` 中注释掉"停止非活动世界"的 cron 任务。
 
-### Various commands to run / test / debug
+### 运行/测试/调试的各种命令
 
-**To stop the back end, in case of too much activity**
+**停止后端,以防有太多活动**
 
-This will stop running the engine and agents. You can still run queries and
-run functions to debug.
+这将停止运行引擎和代理。你仍然可以运行查询和函数进行调试。
 
 ```bash
 just convex run testing:stop
 ```
 
-**To restart the back end after stopping it**
+**在停止后端后重新启动它**
 
 ```bash
 just convex run testing:resume
 ```
 
-**To kick the engine in case the game engine or agents aren't running**
+**如果游戏引擎或代理程序没有运行,则启动引擎**
 
 ```bash
 just convex run testing:kick
 ```
 
-**To archive the world**
+**存档世界**
 
-If you'd like to reset the world and start from scratch, you can archive the current world:
+如果你想重置世界并从头开始,你可以存档当前世界:
 
 ```bash
 just convex run testing:archive
 ```
 
-Then, you can still look at the world's data in the dashboard, but the engine and agents will
-no longer run.
+然后,你仍然可以在仪表板中查看世界的数据,但引擎和代理程序将不再运行。
 
-You can then create a fresh world with `init`.
+你可以使用 `init` 创建一个全新的世界。
 
 ```bash
 just convex run init
 ```
 
-**To clear all databases**
+**清除所有数据库**
 
-You can wipe all tables with the `wipeAllTables` testing function.
+你可以使用 `wipeAllTables` 测试函数来清除所有表。
 
 ```bash
 just convex run testing:wipeAllTables
 ```
 
-**To pause your backend deployment**
+**暂停你的后端部署**
 
-You can go to the [dashboard](https://dashboard.convex.dev) to your deployment
-settings to pause and un-pause your deployment. This will stop all functions, whether invoked
-from the client, scheduled, or as a cron job. See this as a last resort, as
-there are gentler ways of stopping above. Once you
+你可以在 [仪表板](https://dashboard.convex.dev) 上访问你的部署设置,
+暂停和取消暂停你的部署。这将停止所有从客户端、计划任务或 cron 作业调用的函数。
+将其视为最后的手段,因为上面有更温和的停止方式。一旦你
 
-## Customize your own simulation
+## 自定义你自己的模拟
 
-NOTE: every time you change character data, you should re-run
-`just convex run testing:wipeAllTables` and then
-`npm run dev` to re-upload everything to Convex.
-This is because character data is sent to Convex on the initial load.
-However, beware that `just convex run testing:wipeAllTables` WILL wipe all of your data.
+注意:每次你更改角色数据时,你都应该重新运行
+`just convex run testing:wipeAllTables` 然后
+`npm run dev` 将所有内容重新上传到 Convex。
+这是因为角色数据在初始加载时会发送到 Convex。
+但是要注意 `just convex run testing:wipeAllTables` 会删除你所有的数据。
 
-1. Create your own characters and stories: All characters and stories, as well as their spritesheet references are stored in [characters.ts](./data/characters.ts). You can start by changing character descriptions.
+1. 创建你自己的角色和故事: 所有角色和故事以及他们的精灵表引用都存储在 [characters.ts](./data/characters.ts) 中。你可以从更改角色描述开始。
 
-2. Updating spritesheets: in `data/characters.ts`, you will see this code:
+2. 更新精灵表: 在 `data/characters.ts` 中,你会看到这样的代码:
 
 ```ts
 export const characters = [
@@ -213,233 +205,204 @@ export const characters = [
 ];
 ```
 
-You should find a sprite sheet for your character, and define sprite motion / assets in the corresponding file (in the above example, `f1SpritesheetData` was defined in f1.ts)
+你应该为你的角色找一个精灵表,并在对应的文件中定义精灵动作/资源(在上面的例子中,`f1SpritesheetData` 是在 f1.ts 中定义的)
 
-3. Update the Background (Environment): The map gets loaded in `convex/init.ts` from `data/gentle.js`. To update the map, follow these steps:
+3. 更新背景(环境): 地图在 `convex/init.ts` 中从 `data/gentle.js` 加载。要更新地图,请按照以下步骤操作:
 
-   - Use [Tiled](https://www.mapeditor.org/) to export tilemaps as a JSON file (2 layers named bgtiles and objmap)
-   - Use the `convertMap.js` script to convert the JSON to a format that the engine can use.
+   - 使用 [Tiled](https://www.mapeditor.org/) 将地形图导出为 JSON 文件(命名为 bgtiles 和 objmap 的两层)
+   - 使用 `convertMap.js` 脚本将 JSON 转换为引擎可以使用的格式。
 
 ```console
 node data/convertMap.js <mapDataPath> <assetPath> <tilesetpxw> <tilesetpxh>
 ```
 
-- `<mapDataPath>`: Path to the Tiled JSON file.
-- `<assetPath>`: Path to tileset images.
-- `<tilesetpxw>`: Tileset width in pixels.
-- `<tilesetpxh>`: Tileset height in pixels.
-  Generates `converted-map.js` that you can use like `gentle.js`
+- `<mapDataPath>`: Tiled JSON 文件的路径。
+- `<assetPath>`: 地形图素材图像的路径。
+- `<tilesetpxw>`: 地形图宽度(像素)。
+- `<tilesetpxh>`: 地形图高度(像素)。
+  生成 `converted-map.js`,你可以像使用 `gentle.js` 一样使用它。
 
-4. Change the background music by modifying the prompt in `convex/music.ts`
-5. Change how often to generate new music at `convex/crons.ts` by modifying the `generate new background music` job
+4. 通过修改 `convex/music.ts` 中的提示来更改背景音乐
+5. 在 `convex/crons.ts` 中通过修改"生成新背景音乐"作业来更改生成新音乐的频率
 
-## Using a cloud AI Provider
+## 使用云 AI 提供商
 
-Configure `convex/util/llm.ts` or set these env variables:
+配置 `convex/util/llm.ts` 或设置这些环境变量:
 
 ```sh
-# Local Convex
+# 本地 Convex
 just convex env set LLM_API_HOST # url
 just convex env set LLM_MODEL # model
-# Cloud Convex
+# 云端 Convex
 npx convex env set LLM_API_HOST # url
 npx convex env set LLM_MODEL # model
 ```
 
-The embeddings model config needs to be changed [in code](./convex/util/llm.ts),
-since you need to specify the embeddings dimension.
+由于需要指定嵌入向量的维度,因此嵌入模型配置需要在 [代码](./convex/util/llm.ts) 中更改。
 
-### Keys
+### 密钥
 
-For Together.ai, visit https://api.together.xyz/settings/api-keys
-For OpenAI, visit https://platform.openai.com/account/api-keys
+对于 Together.ai,请访问 https://api.together.xyz/settings/api-keys
+对于 OpenAI,请访问 https://platform.openai.com/account/api-keys
 
-## Using hosted Convex
+## 使用托管的 Convex
 
-You can run your Convex backend in the cloud by just running
+你可以通过运行以下命令在云端运行 Convex 后端:
 
 ```sh
 npx convex dev --once --configure
 ```
 
-And updating the `package.json` scripts to remove `just`:
-change `just convex ...` to `convex ...`.
+并更新 `package.json` 脚本以删除 `just`:
+将 `just convex ...` 改为 `convex ...`。
 
-You'll then need to set any environment variables you had locally in the cloud
-environment with `npx convex env set` or on the dashboard:
+然后你需要使用 `npx convex env set` 或在仪表板上设置你之前在本地环境中设置的任何环境变量:
 https://dashboard.convex.dev/deployment/settings/environment-variables
 
-To run commands, use `npx convex ...` where you used to run `just convex ...`.
+要运行命令,请使用 `npx convex ...`,以前你使用的是 `just convex ...`。
 
-## Deploy the app
+## 部署该应用程序
 
-### Deploy Convex functions to prod environment
+### 将 Convex 函数部署到生产环境
 
-Before you can run the app, you will need to make sure the Convex functions are deployed to its production environment.
+在你可以运行应用程序之前,你需要确保 Convex 函数已部署到其生产环境中。
 
-1. Run `npx convex deploy` to deploy the convex functions to production
-2. Run `npx convex run init --prod`
+1. 运行 `npx convex deploy` 将 convex 函数部署到生产环境
+2. 运行 `npx convex run init --prod`
 
-If you have existing data you want to clear, you can run `npx convex run testing:wipeAllTables --prod`
+如果你有现有数据要清除,你可以运行 `npx convex run testing:wipeAllTables --prod`
 
-### Adding Auth (Optional)
+### 添加认证(可选)
 
-You can add clerk auth back in with `git revert b44a436`.
-Or just look at that diff for what changed to remove it.
+你可以通过 `git revert b44a436` 来添加 Clerk 认证。
+或者只需查看该 diff 以了解移除它时所做的更改。
 
-**Make a Clerk account**
+**创建 Clerk 账户**
 
-- Go to https://dashboard.clerk.com/ and click on "Add Application"
-- Name your application and select the sign-in providers you would like to offer users
-- Create Application
-- Add `VITE_CLERK_PUBLISHABLE_KEY` and `CLERK_SECRET_KEY` to `.env.local`
+- 访问 https://dashboard.clerk.com/ 并点击"添加应用程序"
+- 为你的应用程序命名并选择要为用户提供的登录提供商
+- 创建应用程序
+- 将 `VITE_CLERK_PUBLISHABLE_KEY` 和 `CLERK_SECRET_KEY` 添加到 `.env.local`
 
 ```bash
 VITE_CLERK_PUBLISHABLE_KEY=pk_***
 CLERK_SECRET_KEY=sk_***
 ```
 
-- Go to JWT Templates and create a new Convex Template.
-- Copy the JWKS endpoint URL for use below.
+- 转到 JWT 模板并创建一个新的 Convex 模板。
+- 复制 JWKS 端点 URL 以供下面使用。
 
 ```sh
-npx convex env set CLERK_ISSUER_URL # e.g. https://your-issuer-url.clerk.accounts.dev/
+npx convex env set CLERK_ISSUER_URL # 例如 https://your-issuer-url.clerk.accounts.dev/
 ```
 
-### Deploy to Vercel
+### 部署到 Vercel
 
-- Register an account on Vercel and then [install the Vercel CLI](https://vercel.com/docs/cli).
-- **If you are using Github Codespaces**: You will need to [install the Vercel CLI](https://vercel.com/docs/cli) and authenticate from your codespaces cli by running `vercel login`.
-- Deploy the app to Vercel with `vercel --prod`.
+- 在 Vercel 上注册一个账户,然后 [安装 Vercel CLI](https://vercel.com/docs/cli)。
+- **如果你使用 Github Codespaces**: 你需要 [安装 Vercel CLI](https://vercel.com/docs/cli) 并通过运行 `vercel login` 从你的 codespaces cli 进行身份验证。
+- 使用 `vercel --prod` 将应用程序部署到 Vercel。
 
-## Using local inference from a cloud deployment.
+## 从云端部署使用本地推理
 
-We support using [Ollama](https://github.com/jmorganca/ollama) for conversation generations.
-To have it accessible from the web, you can use Tunnelmole or Ngrok or similar.
+我们支持使用 [Ollama](https://github.com/jmorganca/ollama) 进行对话生成。
+为了让它可以通过 Web 访问,你可以使用 Tunnelmole 或 Ngrok 等工具。
 
-**Using Tunnelmole**
+**使用 Tunnelmole**
 
-[Tunnelmole](https://github.com/robbie-cahill/tunnelmole-client) is an open source tunneling tool.
+[Tunnelmole](https://github.com/robbie-cahill/tunnelmole-client) 是一个开源的隧道工具。
 
-You can install Tunnelmole using one of the following options:
+你可以通过以下选项之一安装 Tunnelmole:
 
 - NPM: `npm install -g tunnelmole`
 - Linux: `curl -s https://tunnelmole.com/sh/install-linux.sh | sudo bash`
 - Mac: `curl -s https://tunnelmole.com/sh/install-mac.sh --output install-mac.sh && sudo bash install-mac.sh`
-- Windows: Install with NPM, or if you don't have NodeJS installed, download the `exe` file for Windows [here](https://tunnelmole.com/downloads/tmole.exe) and put it somewhere in your PATH.
+- Windows: 使用 NPM 安装,或者如果你没有安装 NodeJS,请从 [此处](https://tunnelmole.com/downloads/tmole.exe) 下载 Windows 的 `exe` 文件,并将其放在你的 PATH 中的某个位置。
 
-Once Tunnelmole is installed, run the following command:
+安装完 Tunnelmole 后,运行以下命令:
 
 ```
 tmole 11434
 ```
 
-Tunnelmole should output a unique url once you run this command.
+Tunnelmole 在运行此命令后应该会输出一个唯一的 url。
 
-**Using Ngrok**
+**使用 Ngrok**
 
-Ngrok is a popular closed source tunneling tool.
+Ngrok 是一个流行的封闭源隧道工具。
 
-- [Install Ngrok](https://ngrok.com/docs/getting-started/)
+- [安装 Ngrok](https://ngrok.com/docs/getting-started/)
 
-Once ngrok is installed and authenticated, run the following command:
+安装并验证 ngrok 后,运行以下命令:
 
 ```
 ngrok http http://localhost:11434
 ```
 
-Ngrok should output a unique url once you run this command.
+Ngrok 在运行此命令后应该会输出一个唯一的 url。
 
-**Add Ollama endpoint to Convex**
+**将 Ollama 端点添加到 Convex**
 
 ```sh
-npx convex env set OLLAMA_HOST # your tunnelmole/ngrok unique url from the previous step
+npx convex env set OLLAMA_HOST # 上一步中的 tunnelmole/ngrok 唯一 url
 ```
 
-**Update Ollama domains**
+**更新 Ollama 域名**
 
-Ollama has a list of accepted domains. Add the ngrok domain so it won't reject
-traffic. see ollama.ai for more details.
+Ollama 有一个受信任域名列表。添加 ngrok 域名,这样它就不会拒绝流量。
+更多详情请查看 ollama.ai。
 
-## Credits
+## 致谢
 
-- All interactions, background music and rendering on the <Game/> component in the project are powered by [PixiJS](https://pixijs.com/).
-- Tilesheet:
+- 该项目中的所有交互、背景音乐和 <Game/> 组件中的渲染都由 [PixiJS](https://pixijs.com/) 提供支持。
+- 地形图:
   - https://opengameart.org/content/16x16-game-assets by George Bailey
   - https://opengameart.org/content/16x16-rpg-tileset by hilau
-- We used https://github.com/pierpo/phaser3-simple-rpg for the original POC of this project. We have since re-wrote the whole app, but appreciated the easy starting point
-- Original assets by [ansimuz](https://opengameart.org/content/tiny-rpg-forest)
-- The UI is based on original assets by [Mounir Tohami](https://mounirtohami.itch.io/pixel-art-gui-elements)
+- 我们使用了 https://github.com/pierpo/phaser3-simple-rpg 作为该项目的原型。虽然我们后来重写了整个应用程序,但非常感谢它提供了一个简单的起点。
+- 原始资源来自 [ansimuz](https://opengameart.org/content/tiny-rpg-forest)
+- UI 基于 [Mounir Tohami](https://mounirtohami.itch.io/pixel-art-gui-elements) 的原始资产
 
-# 🧑‍🏫 What is Convex?
+# 🧑‍🏫 什么是 Convex?
 
-[Convex](https://convex.dev) is a hosted backend platform with a
-built-in database that lets you write your
-[database schema](https://docs.convex.dev/database/schemas) and
-[server functions](https://docs.convex.dev/functions) in
-[TypeScript](https://docs.convex.dev/typescript). Server-side database
-[queries](https://docs.convex.dev/functions/query-functions) automatically
-[cache](https://docs.convex.dev/functions/query-functions#caching--reactivity) and
-[subscribe](https://docs.convex.dev/client/react#reactivity) to data, powering a
-[realtime `useQuery` hook](https://docs.convex.dev/client/react#fetching-data) in our
-[React client](https://docs.convex.dev/client/react). There are also clients for
-[Python](https://docs.convex.dev/client/python),
-[Rust](https://docs.convex.dev/client/rust),
-[ReactNative](https://docs.convex.dev/client/react-native), and
-[Node](https://docs.convex.dev/client/javascript), as well as a straightforward
-[HTTP API](https://docs.convex.dev/http-api/).
+[Convex](https://convex.dev) 是一个托管的后端平台,内置数据库,让你可以使用
+[TypeScript](https://docs.convex.dev/typescript) 编写你的
+[数据库模式](https://docs.convex.dev/database/schemas) 和
+[服务器函数](https://docs.convex.dev/functions)。服务器端数据库
+[查询](https://docs.convex.dev/functions/query-functions) 会自动
+[缓存](https://docs.convex.dev/functions/query-functions#caching--reactivity) 和
+[订阅](https://docs.convex.dev/client/react#reactivity) 数据,为我们的
+[React 客户端](https://docs.convex.dev/client/react) 提供
+[实时 `useQuery` 钩子](https://docs.convex.dev/client/react#fetching-data)。它还支持
+[Python](https://docs.convex.dev/client/python)、
+[Rust](https://docs.convex.dev/client/rust)、
+[ReactNative](https://docs.convex.dev/client/react-native) 和
+[Node](https://docs.convex.dev/client/javascript) 客户端,以及一个简单的
+[HTTP API](https://docs.convex.dev/http-api/)。
 
-The database supports
-[NoSQL-style documents](https://docs.convex.dev/database/document-storage) with
-[opt-in schema validation](https://docs.convex.dev/database/schemas),
-[relationships](https://docs.convex.dev/database/document-ids) and
-[custom indexes](https://docs.convex.dev/database/indexes/)
-(including on fields in nested objects).
+该数据库支持
+[NoSQL 风格的文档](https://docs.convex.dev/database/document-storage) 及
+[可选的模式验证](https://docs.convex.dev/database/schemas)、
+[关系](https://docs.convex.dev/database/document-ids) 和
+[自定义索引](https://docs.convex.dev/database/indexes/)
+(包括对嵌套对象中的字段建索引)。
 
-The
-[`query`](https://docs.convex.dev/functions/query-functions) and
-[`mutation`](https://docs.convex.dev/functions/mutation-functions) server functions have transactional,
-low latency access to the database and leverage our
-[`v8` runtime](https://docs.convex.dev/functions/runtimes) with
-[determinism guardrails](https://docs.convex.dev/functions/runtimes#using-randomness-and-time-in-queries-and-mutations)
-to provide the strongest ACID guarantees on the market:
-immediate consistency,
-serializable isolation, and
-automatic conflict resolution via
-[optimistic multi-version concurrency control](https://docs.convex.dev/database/advanced/occ) (OCC / MVCC).
+[`query`](https://docs.convex.dev/functions/query-functions) 和
+[`mutation`](https://docs.convex.dev/functions/mutation-functions) 服务器函数对数据库具有事务性、
+低延迟访问权限,并利用我们的
+[`v8` 运行时](https://docs.convex.dev/functions/runtimes) 和
+[确定性保护](https://docs.convex.dev/functions/runtimes#using-randomness-and-time-in-queries-and-mutations)
+提供最强的 ACID 保证:
+即时一致性、
+可串行化隔离和通过
+[乐观多版本并发控制](https://docs.convex.dev/database/advanced/occ) (OCC / MVCC) 实现的
+自动冲突解决。
 
-The [`action` server functions](https://docs.convex.dev/functions/actions) have
-access to external APIs and enable other side-effects and non-determinism in
-either our
-[optimized `v8` runtime](https://docs.convex.dev/functions/runtimes) or a more
-[flexible `node` runtime](https://docs.convex.dev/functions/runtimes#nodejs-runtime).
+[`action` 服务器函数](https://docs.convex.dev/functions/actions) 可以访问外部 API 并支持其他侧效应和非确定性行为,这些函数可以在我们优化过的 `v8` 运行时或更灵活的 `node` 运行时中执行。
 
-Functions can run in the background via
-[scheduling](https://docs.convex.dev/scheduling/scheduled-functions) and
-[cron jobs](https://docs.convex.dev/scheduling/cron-jobs).
+函数可以通过[调度](https://docs.convex.dev/scheduling/scheduled-functions)和 [cron 作业](https://docs.convex.dev/scheduling/cron-jobs)在后台运行。
 
-Development is cloud-first, with
-[hot reloads for server function](https://docs.convex.dev/cli#run-the-convex-dev-server) editing via the
-[CLI](https://docs.convex.dev/cli),
-[preview deployments](https://docs.convex.dev/production/hosting/preview-deployments),
-[logging and exception reporting integrations](https://docs.convex.dev/production/integrations/),
-There is a
-[dashboard UI](https://docs.convex.dev/dashboard) to
-[browse and edit data](https://docs.convex.dev/dashboard/deployments/data),
-[edit environment variables](https://docs.convex.dev/production/environment-variables),
-[view logs](https://docs.convex.dev/dashboard/deployments/logs),
-[run server functions](https://docs.convex.dev/dashboard/deployments/functions), and more.
+开发是云优先的,通过 [CLI](https://docs.convex.dev/cli) 进行[服务器函数热重载编辑](https://docs.convex.dev/cli#run-the-convex-dev-server)、[预览部署](https://docs.convex.dev/production/hosting/preview-deployments)、[日志和异常报告集成](https://docs.convex.dev/production/integrations/)。
+还有一个 [仪表板 UI](https://docs.convex.dev/dashboard) 用于[浏览和编辑数据](https://docs.convex.dev/dashboard/deployments/data)、[编辑环境变量](https://docs.convex.dev/production/environment-variables)、[查看日志](https://docs.convex.dev/dashboard/deployments/logs)、[运行服务器函数](https://docs.convex.dev/dashboard/deployments/functions)等。
 
-There are built-in features for
-[reactive pagination](https://docs.convex.dev/database/pagination),
-[file storage](https://docs.convex.dev/file-storage),
-[reactive text search](https://docs.convex.dev/text-search),
-[vector search](https://docs.convex.dev/vector-search),
-[https endpoints](https://docs.convex.dev/functions/http-actions) (for webhooks),
-[snapshot import/export](https://docs.convex.dev/database/import-export/),
-[streaming import/export](https://docs.convex.dev/production/integrations/streaming-import-export), and
-[runtime validation](https://docs.convex.dev/database/schemas#validators) for
-[function arguments](https://docs.convex.dev/functions/args-validation) and
-[database data](https://docs.convex.dev/database/schemas#schema-validation).
+它内置了[响应式分页](https://docs.convex.dev/database/pagination)、[文件存储](https://docs.convex.dev/file-storage)、[响应式文本搜索](https://docs.convex.dev/text-search)、[向量搜索](https://docs.convex.dev/vector-search)、[https 端点](https://docs.convex.dev/functions/http-actions) (用于 webhooks)、[快照导入/导出](https://docs.convex.dev/database/import-export/)、[流式导入/导出](https://docs.convex.dev/production/integrations/streaming-import-export) 和[运行时验证](https://docs.convex.dev/database/schemas#validators) (用于[函数参数](https://docs.convex.dev/functions/args-validation)和[数据库数据](https://docs.convex.dev/database/schemas#schema-validation) )等功能。
 
-Everything scales automatically, and it’s [free to start](https://www.convex.dev/plans).
+一切都会自动扩展,并且[免费开始使用](https://www.convex.dev/plans)。
